@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group 'me.centrium.bossfight'
+version ''
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url = "https://repo.codemc.io/repository/maven-public/"}
+}
+
+dependencies {
+    compileOnly fileTree(dir: 'libs', includes: ['*.jar'])
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+}
+
+tasks.withType(JavaCompile)*.options*.encoding = 'UTF-8'
+
+jar {
+    from {
+        configurations.runtimeClasspath
+                .collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

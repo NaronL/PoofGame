@@ -1,0 +1,6 @@
+name: BossFight
+main: me.centrium.bossfight.BossFight
+version: 1.0
+author: Naron
+api-version: 1.13
+softdepend: [RMCS, RMCS-API]
